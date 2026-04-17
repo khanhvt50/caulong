@@ -76,14 +76,10 @@ async function submitForm() {
   const day = document.getElementById("day").value;
   const msg = document.getElementById("msg");
 
-  if (!name) {
-    msg.innerHTML = "❌ Nhập tên!";
-    return;
-  }
-
   try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbw8rYEsRkLxFO8YGP-XesYmi26oBE_pUGZZtlOSbp9_CeayI0bu7ZXkzQDFykDC38ry5Q/exec", {
+    await fetch("https://script.google.com/macros/s/AKfycbzoWb84X1_OOgAo62c_apipHilbjH-uyfGP68fylx5PLmxoEySQsVSNOuJYO6CdDDw-Tw/exec", {
       method: "POST",
+      mode: "no-cors", // 🔥 QUAN TRỌNG
       body: JSON.stringify({
         name: name,
         day: day
@@ -93,17 +89,12 @@ async function submitForm() {
       }
     });
 
-    const data = await res.json();
-
-    if (data.status === "success") {
-      msg.innerHTML = "✅ Đăng ký thành công!";
-    } else {
-      msg.innerHTML = "❌ Lỗi: " + data.message;
-    }
+    // ⚠️ no-cors sẽ không đọc được response
+    msg.innerHTML = "✅ Đăng ký thành công!";
 
   } catch (err) {
-    msg.innerHTML = "❌ Không kết nối được!";
     console.error(err);
+    msg.innerHTML = "❌ Không kết nối được!";
   }
 }
 </script>

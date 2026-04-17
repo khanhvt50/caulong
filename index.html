@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Đăng ký cầu lông</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: linear-gradient(135deg, #6dd5ed, #2193b0);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 15px;
+  width: 300px;
+  text-align: center;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#msg {
+  margin-top: 10px;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>🏸 Đăng ký cầu lông</h2>
+
+  <input type="text" id="name" placeholder="Nhập tên">
+
+  <select id="day">
+    <option>Thứ 2</option>
+    <option>Thứ 3</option>
+    <option>Thứ 4</option>
+    <option>Thứ 5</option>
+    <option>Thứ 6</option>
+    <option>Thứ 7</option>
+    <option>Chủ nhật</option>
+  </select>
+
+  <button onclick="submitForm()">Đăng ký</button>
+
+  <div id="msg"></div>
+</div>
+
+<script>
+async function submitForm() {
+  const name = document.getElementById("name").value;
+  const day = document.getElementById("day").value;
+  const msg = document.getElementById("msg");
+
+  if (!name) {
+    msg.innerHTML = "❌ Nhập tên!";
+    return;
+  }
+
+  try {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbw8rYEsRkLxFO8YGP-XesYmi26oBE_pUGZZtlOSbp9_CeayI0bu7ZXkzQDFykDC38ry5Q/exec", {
+      method: "POST",
+      body: JSON.stringify({
+        name: name,
+        day: day
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    const data = await res.json();
+
+    if (data.status === "success") {
+      msg.innerHTML = "✅ Đăng ký thành công!";
+    } else {
+      msg.innerHTML = "❌ Lỗi: " + data.message;
+    }
+
+  } catch (err) {
+    msg.innerHTML = "❌ Không kết nối được!";
+    console.error(err);
+  }
+}
+</script>
+
+</body>
+</html>

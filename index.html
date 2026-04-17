@@ -41,6 +41,10 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  background: #999;
+}
+
 #msg {
   margin-top: 10px;
   font-weight: bold;
@@ -65,37 +69,52 @@ button {
     <option>Chủ nhật</option>
   </select>
 
-  <button onclick="submitForm()">Đăng ký</button>
+  <button id="btn" onclick="submitForm()">Đăng ký</button>
 
   <div id="msg"></div>
 </div>
 
 <script>
+const URL = "https://script.google.com/macros/s/AKfycbxfDKU_rbu0ed_P-HbHkb3slHPfmktoLhPUNBC-ZpbiLVqx_w7KFZ9YnsVXbVOTTzhm-g/exec";
+
 async function submitForm() {
-  const name = document.getElementById("name").value;
+  const name = document.getElementById("name").value.trim();
   const day = document.getElementById("day").value;
   const msg = document.getElementById("msg");
+  const btn = document.getElementById("btn");
+
+  if (!name) {
+    msg.innerHTML = "⚠️ Vui lòng nhập tên!";
+    return;
+  }
+
+  msg.innerHTML = "⏳ Đang gửi...";
+  btn.disabled = true;
 
   try {
-    await fetch("https://script.google.com/macros/s/AKfycbzoWb84X1_OOgAo62c_apipHilbjH-uyfGP68fylx5PLmxoEySQsVSNOuJYO6CdDDw-Tw/exec", {
+    const res = await fetch(URL, {
       method: "POST",
-      mode: "no-cors", // 🔥 QUAN TRỌNG
-      body: JSON.stringify({
+      body: new URLSearchParams({
         name: name,
         day: day
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
+      })
     });
 
-    // ⚠️ no-cors sẽ không đọc được response
-    msg.innerHTML = "✅ Đăng ký thành công!";
+    const data = await res.json();
+
+    if (data.status === "success") {
+      msg.innerHTML = "✅ Đăng ký thành công!";
+      document.getElementById("name").value = "";
+    } else {
+      msg.innerHTML = "❌ Lỗi từ server!";
+    }
 
   } catch (err) {
     console.error(err);
     msg.innerHTML = "❌ Không kết nối được!";
   }
+
+  btn.disabled = false;
 }
 </script>
 

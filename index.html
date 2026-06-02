@@ -2,696 +2,227 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Đăng ký tham gia đánh cầu lông | CLB Cầu Lông</title>
-    <!-- Font Awesome 6 (free icons) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts: Inter & Be Vietnam for modern look -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký cầu lông - Lưu trên GitHub</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #e0f2e9 0%, #c8e6df 100%);
-            min-height: 100vh;
-            padding: 2rem 1.5rem;
-        }
-
-        /* Main container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        /* header section */
-        .hero {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(120deg, #1e6f3f, #2b9e5c);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.3px;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .hero h1 i {
-            background: none;
-            color: #2c7a47;
-            font-size: 2rem;
-        }
-
-        .hero p {
-            color: #2d5a3b;
-            font-weight: 500;
-            margin-top: 0.5rem;
-            font-size: 1rem;
-            background: rgba(255,255,240,0.7);
+        /* Đánh dấu phần cần sửa bằng màu đỏ và khung viền */
+        .highlight-red {
+            background-color: #ffdddd;
+            border-left: 6px solid #ff0000;
+            padding: 8px 12px;
+            font-family: monospace;
+            font-weight: bold;
+            color: #b00000;
             display: inline-block;
-            padding: 0.3rem 1.5rem;
-            border-radius: 40px;
-            backdrop-filter: blur(2px);
+            margin: 5px 0;
         }
-
-        /* two column layout: form + list on larger screens */
-        .dashboard {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .form-card, .list-card {
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(2px);
-            border-radius: 2rem;
-            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
-            padding: 1.8rem 2rem;
-            transition: all 0.2s ease;
-            border: 1px solid rgba(70, 130, 90, 0.2);
-        }
-
-        .form-card {
-            flex: 1.2;
-            min-width: 320px;
-        }
-
-        .list-card {
-            flex: 2;
-            min-width: 340px;
-        }
-
-        .section-title {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #1e4620;
-            border-left: 6px solid #2e8b57;
-            padding-left: 1rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title i {
-            color: #2e8b57;
-            font-size: 1.4rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.3rem;
-        }
-
-        label {
-            font-weight: 600;
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #1f3b2c;
-            font-size: 0.9rem;
-            letter-spacing: -0.2px;
-        }
-
-        label i {
-            width: 24px;
-            color: #2e8b57;
-            margin-right: 6px;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 0.85rem 1rem;
-            border-radius: 1.2rem;
-            border: 1.5px solid #e2e8f0;
-            background: #fefefe;
-            font-size: 0.95rem;
-            transition: all 0.2s;
-            outline: none;
-        }
-
-        input:focus, select:focus {
-            border-color: #2e8b57;
-            box-shadow: 0 0 0 3px rgba(46, 139, 86, 0.2);
-        }
-
-        .btn-submit {
-            background: linear-gradient(95deg, #1f7842, #2e9c5c);
-            border: none;
-            padding: 0.9rem 1.2rem;
-            font-weight: 700;
-            font-size: 1rem;
-            color: white;
-            border-radius: 2rem;
-            cursor: pointer;
-            transition: 0.2s;
-            width: 100%;
-            margin-top: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            box-shadow: 0 5px 12px rgba(0,0,0,0.1);
-        }
-
-        .btn-submit:hover {
-            background: linear-gradient(95deg, #166636, #238b4e);
-            transform: translateY(-2px);
-        }
-
-        .message-area {
-            margin: 1rem 0 0.5rem;
-            padding: 0.7rem;
-            border-radius: 2rem;
-            font-size: 0.85rem;
-            text-align: center;
-            font-weight: 500;
-            background: #f1f9f0;
-            color: #1f5631;
-            display: none;
-        }
-
-        .message-area.show {
-            display: block;
-            animation: fadeSlide 0.2s ease;
-        }
-
-        .error-message {
-            background: #ffe8e6;
-            color: #c23d2b;
-        }
-
-        @keyframes fadeSlide {
-            from { opacity: 0; transform: translateY(-8px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
-
-        /* table style */
-        .registrations-table-wrapper {
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 8px;
             overflow-x: auto;
-            margin-top: 1rem;
         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border-radius: 1.5rem;
-            overflow: hidden;
-        }
-
-        th, td {
-            padding: 1rem 0.8rem;
-            text-align: left;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        th {
-            background-color: #eef5ea;
-            font-weight: 600;
-            color: #1f4d2e;
-        }
-
-        td {
-            color: #2c3e2f;
-            font-size: 0.9rem;
-            vertical-align: middle;
-        }
-
-        .badge-time {
-            background: #e0f2e6;
-            padding: 0.25rem 0.6rem;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #155f33;
-            display: inline-block;
-        }
-
-        .delete-btn {
-            background: none;
-            border: none;
-            color: #bc5a44;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: 0.1s;
-            padding: 5px 8px;
-            border-radius: 40px;
-        }
-
-        .delete-btn:hover {
-            background: #fae6e2;
-            color: #b13b25;
-            transform: scale(1.05);
-        }
-
-        .clear-all-btn {
-            background: rgba(222, 92, 72, 0.1);
-            border: 1px solid #e2b3aa;
-            color: #b3442e;
-            padding: 0.5rem 1.2rem;
-            border-radius: 2rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.2s;
-            margin-top: 1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-        }
-
-        .clear-all-btn:hover {
-            background: #df7c66;
-            color: white;
-            border-color: #df7c66;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 0.5rem;
-        }
-
-        .reg-count {
-            background: #d9f0e3;
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #1f6e42;
-        }
-
-        .empty-row td {
-            text-align: center;
-            color: #8faa9a;
-            padding: 2rem;
-            font-style: italic;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 2.5rem;
-            font-size: 0.75rem;
-            color: #4c6b5a;
-        }
-
-        @media (max-width: 780px) {
-            body {
-                padding: 1.2rem;
-            }
-            .form-card, .list-card {
-                padding: 1.5rem;
-            }
-            th, td {
-                padding: 0.7rem 0.5rem;
-                font-size: 0.8rem;
-            }
-            .section-title {
-                font-size: 1.3rem;
-            }
-        }
+        /* Các style khác cho giao diện (giữ nguyên) */
+        * { margin:0; padding:0; box-sizing:border-box; font-family: system-ui, 'Segoe UI', sans-serif; }
+        body { background: linear-gradient(135deg, #e0f2e9, #c8e6df); padding: 2rem; }
+        .container { max-width: 1200px; margin: auto; background: white; border-radius: 2rem; padding: 2rem; box-shadow: 0 20px 35px rgba(0,0,0,0.1); }
+        h1 { color: #1e6f3f; margin-bottom: 0.5rem; }
+        .note { background: #fff3cd; border-left: 6px solid #ffc107; padding: 1rem; margin: 1rem 0; border-radius: 12px; }
+        input, select, textarea, button { width: 100%; padding: 12px; margin: 8px 0; border-radius: 28px; border: 1px solid #ccc; }
+        button { background: #1f7842; color: white; font-weight: bold; cursor: pointer; border: none; }
+        button:hover { opacity: 0.9; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { border-bottom: 1px solid #ddd; padding: 10px; text-align: left; }
+        .badge { background: #e0f2e6; border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; }
+        .flex { display: flex; gap: 2rem; flex-wrap: wrap; }
+        .form-card, .list-card { flex: 1; min-width: 300px; }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="hero">
-        <h1>
-            <i class="fas fa-table-tennis"></i> 
-            ĐĂNG KÝ SÂN CẦU LÔNG
-            <i class="fas fa-shuttlecock"></i>
-        </h1>
-        <p><i class="fas fa-calendar-alt"></i> Đăng ký nhanh – Chọn khung giờ yêu thích – Tham gia cùng CLB</p>
+    <h1>🏸 Đăng ký đánh cầu lông <span style="font-size:0.9rem;">(dữ liệu lưu trên GitHub Issues)</span></h1>
+    <div class="note">
+        <strong>⚠️ HƯỚNG DẪN:</strong> Trước khi dùng, bạn <strong>phải sửa 2 dòng màu đỏ</strong> bên dưới trong thẻ <code>&lt;script&gt;</code> (tìm từ khóa <span class="highlight-red">🔴 THAY_DOI_O_DAY</span>).
     </div>
 
-    <div class="dashboard">
+    <div class="flex">
         <!-- FORM ĐĂNG KÝ -->
         <div class="form-card">
-            <div class="section-title">
-                <i class="fas fa-clipboard-list"></i>
-                <span>Thông tin đăng ký</span>
-            </div>
-            <form id="registrationForm">
-                <div class="form-group">
-                    <label><i class="fas fa-user-circle"></i> Họ và tên <span style="color:#c0392b;">*</span></label>
-                    <input type="text" id="fullName" placeholder="Nguyễn Văn An" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-phone-alt"></i> Số điện thoại <span style="color:#c0392b;">*</span></label>
-                    <input type="tel" id="phone" placeholder="0987 654 321" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-envelope"></i> Email <span style="color:#c0392b;">*</span></label>
-                    <input type="email" id="email" placeholder="tencuaban@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-calendar-day"></i> Ngày tập luyện <span style="color:#c0392b;">*</span></label>
-                    <input type="date" id="playDate" required>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-clock"></i> Khung giờ mong muốn <span style="color:#c0392b;">*</span></label>
-                    <select id="timeSlot" required>
-                        <option value="">-- Chọn giờ --</option>
-                        <option value="08:00 - 10:00">🌅 08:00 - 10:00 (Sáng sớm)</option>
-                        <option value="10:00 - 12:00">☀️ 10:00 - 12:00 (Trưa)</option>
-                        <option value="14:00 - 16:00">🌤️ 14:00 - 16:00 (Chiều)</option>
-                        <option value="16:00 - 18:00">🌆 16:00 - 18:00 (Xế chiều)</option>
-                        <option value="18:00 - 20:00">🌙 18:00 - 20:00 (Tối)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-note-sticky"></i> Ghi chú (không bắt buộc)</label>
-                    <textarea id="notes" rows="2" placeholder="Ví dụ: có mang vợt, muốn ghép đôi..."></textarea>
-                </div>
-                <button type="submit" class="btn-submit">
-                    <i class="fas fa-check-circle"></i> Đăng ký tham gia
-                </button>
-                <div id="formMessage" class="message-area"></div>
+            <h3>📝 Thông tin đăng ký</h3>
+            <form id="regForm">
+                <input type="text" id="fullName" placeholder="Họ và tên *" required>
+                <input type="tel" id="phone" placeholder="Số điện thoại *" required>
+                <input type="email" id="email" placeholder="Email *" required>
+                <input type="date" id="playDate" required>
+                <select id="timeSlot" required>
+                    <option value="">-- Khung giờ --</option>
+                    <option>08:00-10:00</option><option>10:00-12:00</option>
+                    <option>14:00-16:00</option><option>16:00-18:00</option>
+                    <option>18:00-20:00</option>
+                </select>
+                <textarea id="notes" rows="2" placeholder="Ghi chú (vợt, ghép đôi...)"></textarea>
+                <button type="submit">✅ Đăng ký & gửi lên GitHub</button>
+                <div id="msg" style="margin-top: 10px; font-size:0.85rem;"></div>
             </form>
         </div>
 
         <!-- DANH SÁCH ĐĂNG KÝ -->
         <div class="list-card">
-            <div class="section-title">
-                <i class="fas fa-users"></i>
-                <span>Danh sách vận động viên đã đăng ký</span>
-            </div>
-            <div class="stats">
-                <span class="reg-count" id="regCountDisplay"><i class="fas fa-badge-check"></i> 0 người</span>
-                <button id="clearAllBtn" class="clear-all-btn"><i class="fas fa-trash-alt"></i> Xóa tất cả</button>
-            </div>
-            <div class="registrations-table-wrapper">
-                <table id="registrationTable">
-                    <thead>
-                        <tr>
-                            <th>Họ tên</th>
-                            <th>SĐT</th>
-                            <th>Email</th>
-                            <th>Ngày</th>
-                            <th>Giờ</th>
-                            <th style="width:50px">Xóa</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        <tr class="empty-row">
-                            <td colspan="6">Chưa có đăng ký nào. Hãy là người đầu tiên đăng ký!</td>
-                        </tr>
-                    </tbody>
+            <h3>📋 Danh sách đã đăng ký <button id="refreshBtn" style="width:auto; padding:6px 12px; margin-left:10px;">🔄 Tải lại</button></h3>
+            <div id="regCount" style="margin:10px 0;"></div>
+            <div style="overflow-x:auto;">
+                <table id="regTable">
+                    <thead><tr><th>Họ tên</th><th>SĐT</th><th>Ngày</th><th>Giờ</th><th>Issue</th></tr></thead>
+                    <tbody><tr><td colspan="5">🔌 Đang tải danh sách...</td></tr></tbody>
                 </table>
             </div>
-            <div style="font-size: 0.7rem; margin-top: 1rem; color: #6f8f7a; text-align: center;">
-                <i class="fas fa-database"></i> Dữ liệu lưu trong trình duyệt (LocalStorage)
-            </div>
+            <p style="font-size:0.7rem; margin-top:1rem;">Mỗi đăng ký = 1 issue trên GitHub (label: badminton)</p>
         </div>
     </div>
-    <footer>
-        <i class="fas fa-shuttlecock"></i> Sân cầu lông đơn giản – Đăng ký nhanh, kết nối đam mê 
-    </footer>
 </div>
 
 <script>
-    // --- QUẢN LÝ LOCALSTORAGE & RENDER ---
-    const STORAGE_KEY = "badminton_registrations";
+    // ========== 🔴🔴🔴 BẠN CẦN SỬA 2 DÒNG DƯỚI ĐÂY (MÀU ĐỎ) ==========
+    // 1. Thay 'github_pat_xxx' bằng TOKEN thật của bạn (cần quyền repo)
+    const GITHUB_TOKEN = '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';   // <--- 🔴 THAY ĐỔI Ở ĐÂY
+    // 2. Thay 'username/repo-name' bằng tên repository của bạn (VD: 'nguyenvana/badminton')
+    const REPO_NAME = 'khanhvt50/caulong';   // <--- 🔴 THAY ĐỔI Ở ĐÂY
+    // ========== KẾT THÚC VÙNG CẦN SỬA ==========
 
-    // Hàm lấy danh sách đăng ký
-    function getRegistrations() {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (stored) {
-            return JSON.parse(stored);
+    // Hàm gọi API GitHub lấy danh sách issues có label "badminton"
+    async function fetchRegistrations() {
+        const url = `https://api.github.com/repos/${REPO_NAME}/issues?labels=badminton&state=all&per_page=100`;
+        const headers = { Accept: 'application/vnd.github.v3+json' };
+        if (GITHUB_TOKEN && GITHUB_TOKEN !== 'github_pat_xxx') {
+            headers.Authorization = `token ${GITHUB_TOKEN}`;
         }
-        // Dữ liệu mẫu (demo) nếu chưa có gì
-        const sampleData = [
-            {
-                id: 1001,
-                fullName: "Nguyễn Minh Hiếu",
-                phone: "0903123456",
-                email: "minhhieu@example.com",
-                playDate: "2026-06-05",
-                timeSlot: "16:00 - 18:00",
-                notes: "Có vợt, thích đánh đôi"
-            },
-            {
-                id: 1002,
-                fullName: "Trần Thị Lan Anh",
-                phone: "0918765432",
-                email: "lananh.tran@example.com",
-                playDate: "2026-06-07",
-                timeSlot: "18:00 - 20:00",
-                notes: "Đăng ký đánh đơn nữ"
-            }
-        ];
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(sampleData));
-        return sampleData;
-    }
-
-    // lưu danh sách
-    function saveRegistrations(registrations) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(registrations));
-    }
-
-    // format ngày từ YYYY-MM-DD -> DD/MM/YYYY
-    function formatDate(dateString) {
-        if (!dateString) return "";
-        const parts = dateString.split("-");
-        if (parts.length !== 3) return dateString;
-        return `${parts[2]}/${parts[1]}/${parts[0]}`;
-    }
-
-    // Hiển thị message tạm thời
-    let messageTimeout;
-    function showMessage(text, isError = false) {
-        const msgDiv = document.getElementById("formMessage");
-        msgDiv.innerText = text;
-        msgDiv.classList.add("show");
-        if (isError) {
-            msgDiv.classList.add("error-message");
-        } else {
-            msgDiv.classList.remove("error-message");
-        }
-        if (messageTimeout) clearTimeout(messageTimeout);
-        messageTimeout = setTimeout(() => {
-            msgDiv.classList.remove("show");
-        }, 3200);
-    }
-
-    // Cập nhật bảng + số lượng
-    function renderTable() {
-        const registrations = getRegistrations();
-        const tbody = document.getElementById("tableBody");
-        const countSpan = document.getElementById("regCountDisplay");
-        
-        if (!registrations.length) {
-            tbody.innerHTML = `<tr class="empty-row"><td colspan="6">🌟 Chưa có đăng ký nào. Hãy đăng ký ngay! 🌟</td></tr>`;
-            countSpan.innerHTML = `<i class="fas fa-user-friends"></i> 0 người`;
-            return;
-        }
-        
-        countSpan.innerHTML = `<i class="fas fa-user-check"></i> ${registrations.length} người đã đăng ký`;
-        
-        let html = "";
-        registrations.forEach(reg => {
-            // Xử lý hiển thị date đẹp
-            const formattedDate = formatDate(reg.playDate);
-            html += `
-                <tr>
-                    <td><strong>${escapeHtml(reg.fullName)}</strong></td>
-                    <td>${escapeHtml(reg.phone)}</td>
-                    <td>${escapeHtml(reg.email)}</td>
-                    <td>${formattedDate}</td>
-                    <td><span class="badge-time">${escapeHtml(reg.timeSlot)}</span></td>
-                    <td><button class="delete-btn" data-id="${reg.id}" title="Xóa đăng ký"><i class="fas fa-trash-can"></i></button></td>
-                </tr>
-            `;
-        });
-        tbody.innerHTML = html;
-        
-        // Gắn sự kiến xóa cho từng nút
-        document.querySelectorAll('.delete-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const id = parseInt(btn.getAttribute('data-id'));
-                deleteRegistrationById(id);
-            });
+        const res = await fetch(url, { headers });
+        if (!res.ok) throw new Error(`Lỗi ${res.status}: ${res.statusText}`);
+        const issues = await res.json();
+        return issues.map(issue => {
+            const body = issue.body || '';
+            const getName = () => {
+                const match = body.match(/- \*\*Họ và tên:\*\* (.*)/i);
+                return match ? match[1] : (issue.title.replace('Đăng ký: ', ''));
+            };
+            const getPhone = () => { const m = body.match(/- \*\*Số điện thoại:\*\* (.*)/i); return m ? m[1] : '—'; };
+            const getDate = () => { const m = body.match(/- \*\*Ngày tập:\*\* (.*)/i); return m ? m[1] : '—'; };
+            const getTime = () => { const m = body.match(/- \*\*Giờ:\*\* (.*)/i); return m ? m[1] : '—'; };
+            return {
+                number: issue.number,
+                url: issue.html_url,
+                fullName: getName(),
+                phone: getPhone(),
+                playDate: getDate(),
+                timeSlot: getTime()
+            };
         });
     }
-    
-    // simple escape để tránh XSS
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
-            return c;
-        });
-    }
-    
-    // Xóa theo ID
-    function deleteRegistrationById(id) {
-        if (confirm("Bạn có chắc muốn xóa đăng ký này khỏi danh sách?")) {
-            let registrations = getRegistrations();
-            const newList = registrations.filter(reg => reg.id !== id);
-            if (newList.length === registrations.length) {
-                showMessage("Không tìm thấy đăng ký cần xóa!", true);
+
+    // Hiển thị danh sách
+    async function renderList() {
+        const tbody = document.querySelector('#regTable tbody');
+        const countSpan = document.getElementById('regCount');
+        try {
+            const list = await fetchRegistrations();
+            if (list.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5">📭 Chưa có đăng ký nào</td></tr>';
+                countSpan.innerHTML = '0 người đã đăng ký';
                 return;
             }
-            saveRegistrations(newList);
-            renderTable();
-            showMessage("✅ Đã xóa đăng ký thành công.", false);
+            countSpan.innerHTML = `${list.length} người đã đăng ký`;
+            let html = '';
+            list.forEach(reg => {
+                html += `<tr>
+                    <td>${escapeHtml(reg.fullName)}</td>
+                    <td>${escapeHtml(reg.phone)}</td>
+                    <td>${escapeHtml(reg.playDate)}</td>
+                    <td><span class="badge">${escapeHtml(reg.timeSlot)}</span></td>
+                    <td><a href="${reg.url}" target="_blank">#${reg.number}</a></td>
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+        } catch (err) {
+            tbody.innerHTML = `<tr><td colspan="5">❌ Lỗi tải: ${err.message}<br>Kiểm tra TOKEN và REPO_NAME đã sửa đúng chưa!</td></tr>`;
+            countSpan.innerHTML = 'Lỗi kết nối';
         }
     }
-    
-    // Xóa tất cả
-    function deleteAllRegistrations() {
-        if (confirm("⚠️ Xóa tất cả danh sách đăng ký? Hành động này không thể khôi phục.")) {
-            saveRegistrations([]);
-            renderTable();
-            showMessage("🗑️ Đã xóa toàn bộ danh sách đăng ký.", false);
+
+    function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+
+    // Tạo issue mới
+    async function createIssue(data) {
+        const title = `Đăng ký: ${data.fullName}`;
+        const body = `
+## Thông tin đăng ký cầu lông
+- **Họ và tên:** ${data.fullName}
+- **Số điện thoại:** ${data.phone}
+- **Email:** ${data.email}
+- **Ngày tập:** ${data.playDate}
+- **Giờ:** ${data.timeSlot}
+- **Ghi chú:** ${data.notes || 'Không có'}
+        `;
+        const url = `https://api.github.com/repos/${REPO_NAME}/issues`;
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+                Authorization: `token ${GITHUB_TOKEN}`,
+                Accept: 'application/vnd.github.v3+json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ title, body, labels: ['badminton'] })
+        });
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.message);
         }
+        return await res.json();
     }
-    
-    // Kiểm tra trùng số điện thoại (tránh đăng ký trùng để quản lý đơn giản)
-    function isPhoneDuplicate(phone, excludeId = null) {
-        const registrations = getRegistrations();
-        return registrations.some(reg => reg.phone === phone && (excludeId === null || reg.id !== excludeId));
-    }
-    
-    // validate email
-    function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
-        return emailRegex.test(email);
-    }
-    
-    // validate phone (basic: 8-12 số, có thể có dấu cách hoặc dấu gạch, nhưng kiểm tra số)
-    function isValidPhone(phone) {
-        const phoneClean = phone.replace(/[\s\-\(\)]/g, '');
-        return /^[0-9]{8,12}$/.test(phoneClean);
-    }
-    
-    // Thêm đăng ký mới
-    function addNewRegistration(event) {
-        event.preventDefault();
-        
-        // Lấy giá trị
-        const fullName = document.getElementById("fullName").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const playDate = document.getElementById("playDate").value;
-        const timeSlot = document.getElementById("timeSlot").value;
-        const notes = document.getElementById("notes").value.trim();
-        
-        // Validation cơ bản
-        if (!fullName) {
-            showMessage("Vui lòng nhập họ và tên.", true);
+
+    // Xử lý submit form
+    document.getElementById('regForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const msgDiv = document.getElementById('msg');
+        msgDiv.innerHTML = '⏳ Đang gửi...';
+        const fullName = document.getElementById('fullName').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const playDate = document.getElementById('playDate').value;
+        const timeSlot = document.getElementById('timeSlot').value;
+        const notes = document.getElementById('notes').value;
+
+        if (!fullName || !phone || !email || !playDate || !timeSlot) {
+            msgDiv.innerHTML = '❌ Vui lòng điền đầy đủ thông tin!';
             return;
         }
-        if (!phone) {
-            showMessage("Số điện thoại không được để trống.", true);
+        // Validate phone (8-12 số)
+        if (!/^[0-9]{8,12}$/.test(phone.replace(/\s/g,''))) {
+            msgDiv.innerHTML = '❌ Số điện thoại không hợp lệ (8-12 chữ số)';
             return;
         }
-        if (!isValidPhone(phone)) {
-            showMessage("Số điện thoại không hợp lệ (8-12 chữ số).", true);
+        // Ngày không quá khứ
+        if (new Date(playDate) < new Date().setHours(0,0,0,0)) {
+            msgDiv.innerHTML = '❌ Ngày tập không được là quá khứ';
             return;
         }
-        if (!email) {
-            showMessage("Email không được để trống.", true);
-            return;
+
+        try {
+            await createIssue({ fullName, phone, email, playDate, timeSlot, notes });
+            msgDiv.innerHTML = '✅ Đăng ký thành công! Đã tạo issue trên GitHub.';
+            document.getElementById('regForm').reset();
+            await renderList(); // cập nhật danh sách
+        } catch (err) {
+            msgDiv.innerHTML = `❌ Lỗi: ${err.message}. Kiểm tra token và repo.`;
         }
-        if (!isValidEmail(email)) {
-            showMessage("Email không đúng định dạng (ví dụ: ten@email.com).", true);
-            return;
-        }
-        if (!playDate) {
-            showMessage("Vui lòng chọn ngày tập luyện.", true);
-            return;
-        }
-        if (!timeSlot) {
-            showMessage("Vui lòng chọn khung giờ mong muốn.", true);
-            return;
-        }
-        
-        // Kiểm tra ngày không được trong quá khứ (so với hôm nay)
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const selectedDate = new Date(playDate);
-        if (selectedDate < today) {
-            showMessage("Ngày tập không thể là ngày trong quá khứ. Vui lòng chọn lại.", true);
-            return;
-        }
-        
-        // Kiểm tra trùng số điện thoại (đơn giản)
-        if (isPhoneDuplicate(phone)) {
-            showMessage(`Số điện thoại ${phone} đã đăng ký trước đó. Vui lòng dùng số khác hoặc liên hệ BTC.`, true);
-            return;
-        }
-        
-        // Tạo ID duy nhất
-        const newId = Date.now();
-        const newRegistration = {
-            id: newId,
-            fullName: fullName,
-            phone: phone,
-            email: email,
-            playDate: playDate,
-            timeSlot: timeSlot,
-            notes: notes || ""
-        };
-        
-        let registrations = getRegistrations();
-        registrations.push(newRegistration);
-        saveRegistrations(registrations);
-        
-        // Reset form (trừ notes, nhưng reset tất cả)
-        document.getElementById("registrationForm").reset();
-        // Xóa ghi chú textarea cũng reset
-        document.getElementById("notes").value = "";
-        
-        renderTable();
-        showMessage(`🎉 Đăng ký thành công! Chào mừng ${fullName} tham gia sân cầu lông.`, false);
-        
-        // Scroll nhẹ lên bảng danh sách nếu cần
-        document.querySelector(".list-card").scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-    
-    // Thiết lập min date cho input date (hôm nay)
-    function setMinDateForDatePicker() {
-        const dateInput = document.getElementById("playDate");
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const dd = String(today.getDate()).padStart(2, '0');
-        const minDate = `${yyyy}-${mm}-${dd}`;
-        dateInput.setAttribute("min", minDate);
-        // Để trống mặc định, không auto fill để người dùng chọn
-    }
-    
-    // Khởi tạo event, hiển thị
-    document.addEventListener("DOMContentLoaded", () => {
-        setMinDateForDatePicker();
-        renderTable();
-        
-        // Form submit
-        const form = document.getElementById("registrationForm");
-        form.addEventListener("submit", addNewRegistration);
-        
-        // Nút xóa tất cả
-        const clearAllBtn = document.getElementById("clearAllBtn");
-        clearAllBtn.addEventListener("click", deleteAllRegistrations);
     });
+
+    document.getElementById('refreshBtn').addEventListener('click', renderList);
+    // Lưu ý: khi trang load, nếu token và repo chưa sửa thì sẽ báo lỗi
+    if (GITHUB_TOKEN === 'github_pat_xxx' || REPO_NAME === 'username/repo-name') {
+        document.querySelector('#regTable tbody').innerHTML = '<tr><td colspan="5">🔴 BẠN CHƯA SỬA TOKEN & REPO! Hãy mở file HTML, tìm 2 dòng màu đỏ trong thẻ script và thay bằng thông tin thật.</td></tr>';
+    } else {
+        renderList();
+    }
 </script>
 </body>
 </html>

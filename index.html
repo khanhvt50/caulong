@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Đăng ký cầu lông - Lưu GitHub Issues (Cấu hình sẵn)</title>
+    <title>Đăng ký cầu lông - Lưu GitHub (khanhvt50/caulong)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -129,14 +129,6 @@
             padding: 0.3rem 1rem;
             margin: 0;
         }
-        .config-note {
-            background: #fff7e0;
-            border-left: 5px solid #e6a017;
-            padding: 0.8rem;
-            border-radius: 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-        }
         footer {
             text-align: center;
             margin-top: 2rem;
@@ -151,14 +143,11 @@
 <body>
 <div class="container">
     <h1><i class="fas fa-table-tennis"></i> Đăng ký cầu lông <i class="fas fa-shuttlecock"></i></h1>
-    <div class="sub"><i class="fab fa-github"></i> Dữ liệu lưu trực tiếp trên GitHub Issues</div>
+    <div class="sub"><i class="fab fa-github"></i> Lưu trực tiếp lên GitHub Issues · <strong>khanhvt50/caulong</strong></div>
 
     <div class="flex">
         <!-- FORM ĐĂNG KÝ -->
         <div class="card">
-            <div class="config-note">
-                <i class="fas fa-wrench"></i> <strong>Cấu hình GitHub:</strong> Bạn cần sửa trực tiếp trong mã nguồn file HTML (tìm dòng <code>const GITHUB_TOKEN</code> và <code>const REPO_NAME</code> ở đầu thẻ script) để nhập token và repository của mình.
-            </div>
             <h2><i class="fas fa-clipboard-list"></i> Thông tin đăng ký</h2>
             <form id="regForm">
                 <div class="form-group">
@@ -209,23 +198,19 @@
                     <thead><tr><th>Họ tên</th><th>SĐT</th><th>Ngày</th><th>Giờ</th><th>Issue</th></tr></thead>
                     <tbody><tr><td colspan="5">Đang tải danh sách...</td></tr>
                 </tbody>
-                </table>
-            </div>
+            </table>
         </div>
     </div>
     <footer>Mỗi đăng ký tạo một issue với label "badminton-registration" · Dữ liệu lưu vĩnh viễn trên GitHub</footer>
 </div>
 
 <script>
-    // ============================================================
-    // 🔴🔴🔴 BẠN CẦN SỬA 2 DÒNG DƯỚI ĐÂY (THAY BẰNG THÔNG TIN THẬT) 🔴🔴🔴
-    // 1. GitHub Token (cần quyền repo). Ví dụ: 'ghp_xxxxxxxxxxxxxxxxxxxx'
+    // ========== CẤU HÌNH GITHUB CỤ THỂ CỦA BẠN ==========
     const GITHUB_TOKEN = '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';
-    // 2. Tên repository (dạng username/repo-name). Ví dụ: 'khanhvt50/caulong'
     const REPO_NAME = 'khanhvt50/caulong';
-    // ============================================================
+    // ===================================================
 
-    // Hàm hiển thị message
+    // Hàm hiển thị thông báo
     function showMessage(msg, isError = false, targetId = "formMsg") {
         const el = document.getElementById(targetId);
         if (!el) return;
@@ -240,9 +225,7 @@
     async function fetchIssues() {
         const url = `https://api.github.com/repos/${REPO_NAME}/issues?labels=badminton-registration&state=all&per_page=100`;
         const headers = { Accept: 'application/vnd.github.v3+json' };
-        if (GITHUB_TOKEN && GITHUB_TOKEN !== 'ghp_thay_bang_token_cua_ban') {
-            headers.Authorization = `token ${GITHUB_TOKEN}`;
-        }
+        if (GITHUB_TOKEN) headers.Authorization = `token ${GITHUB_TOKEN}`;
         const res = await fetch(url, { headers });
         if (!res.ok) {
             const err = await res.json().catch(() => ({}));
@@ -251,7 +234,7 @@
         return await res.json();
     }
 
-    // Parse issue body lấy thông tin
+    // Parse nội dung issue
     function parseIssue(issue) {
         const body = issue.body || '';
         const get = (label) => {
@@ -271,19 +254,14 @@
         };
     }
 
-    // Hiển thị danh sách
+    // Hiển thị danh sách lên bảng
     async function renderList() {
         const tbody = document.querySelector('#regTable tbody');
         const countSpan = document.getElementById('regCount');
-        if (!GITHUB_TOKEN || GITHUB_TOKEN === 'ghp_thay_bang_token_cua_ban' || !REPO_NAME || REPO_NAME === 'khanhvt50/caulong') {
-            tbody.innerHTML = '<tr><td colspan="5">⚠️ Bạn chưa sửa token và tên repo trong file HTML. Hãy mở file, tìm dòng const GITHUB_TOKEN và const REPO_NAME để nhập thông tin thật.</td></tr>';
-            countSpan.innerHTML = '🔧 Chưa cấu hình';
-            return;
-        }
         try {
             const issues = await fetchIssues();
             if (issues.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5">📭 Chưa có đăng ký nào. Hãy là người đầu tiên!</td></tr>';
+                tbody.innerHTML = '<tr class="empty-row"><td colspan="5">📭 Chưa có đăng ký nào. Hãy là người đầu tiên!</td></tr>';
                 countSpan.innerHTML = '0 người';
                 return;
             }
@@ -301,7 +279,7 @@
             });
             tbody.innerHTML = html;
         } catch (err) {
-            tbody.innerHTML = `<tr><td colspan="5">❌ Lỗi: ${err.message}<br>Kiểm tra token và repo (cần token có quyền repo)</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="5">❌ Lỗi tải danh sách: ${err.message}<br>Kiểm tra token và repo (cần quyền repo)</td></tr>`;
             countSpan.innerHTML = 'Lỗi';
         }
     }
@@ -339,7 +317,7 @@
         return await res.json();
     }
 
-    // Submit form
+    // Xử lý submit form
     document.getElementById('regForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const fullName = document.getElementById('fullName').value.trim();
@@ -349,7 +327,7 @@
         const timeSlot = document.getElementById('timeSlot').value;
         const notes = document.getElementById('notes').value;
 
-        // Validate cơ bản
+        // Validate dữ liệu
         if (!fullName || !phone || !email || !playDate || !timeSlot) {
             showMessage('Vui lòng điền đầy đủ thông tin', true);
             return;
@@ -364,19 +342,13 @@
             return;
         }
 
-        // Kiểm tra cấu hình token/repo
-        if (!GITHUB_TOKEN || GITHUB_TOKEN === 'ghp_thay_bang_token_cua_ban' || !REPO_NAME || REPO_NAME === 'khanhvt50/caulong') {
-            showMessage('⚠️ Bạn chưa sửa token và tên repo trong file HTML! Hãy mở file và nhập thông tin thật.', true);
-            return;
-        }
-
         const btn = e.target.querySelector('button[type="submit"]') || e.target;
         const originalHtml = btn.innerHTML;
         btn.disabled = true;
         btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Đang gửi...';
         try {
             await createIssue({ fullName, phone, email, playDate, timeSlot, notes });
-            showMessage('✅ Đăng ký thành công! Issue đã tạo.', false);
+            showMessage('✅ Đăng ký thành công! Issue đã tạo trên GitHub.', false);
             document.getElementById('regForm').reset();
             await renderList();
         } catch (err) {
@@ -396,7 +368,7 @@
     const todayStr = new Date().toISOString().split('T')[0];
     document.getElementById('playDate').setAttribute('min', todayStr);
 
-    // Tải danh sách khi trang load
+    // Tải danh sách khi mở trang
     renderList();
 </script>
 </body>

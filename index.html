@@ -2,155 +2,408 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký cầu lông - Lưu trên GitHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Đăng ký cầu lông - Lưu trên GitHub (khanhvt50/caulong)</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Đánh dấu phần cần sửa bằng màu đỏ và khung viền */
-        .highlight-red {
-            background-color: #ffdddd;
-            border-left: 6px solid #ff0000;
-            padding: 8px 12px;
-            font-family: monospace;
-            font-weight: bold;
-            color: #b00000;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #d4f1e6, #b8dfce);
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(120deg, #1e6f3f, #2b9e5c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .hero p {
+            background: rgba(255,255,245,0.8);
             display: inline-block;
-            margin: 5px 0;
+            padding: 0.4rem 1.5rem;
+            border-radius: 40px;
+            color: #1f5631;
+            margin-top: 0.6rem;
+            font-weight: 500;
         }
-        pre {
-            background: #f4f4f4;
-            padding: 10px;
-            border-radius: 8px;
-            overflow-x: auto;
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
         }
-        /* Các style khác cho giao diện (giữ nguyên) */
-        * { margin:0; padding:0; box-sizing:border-box; font-family: system-ui, 'Segoe UI', sans-serif; }
-        body { background: linear-gradient(135deg, #e0f2e9, #c8e6df); padding: 2rem; }
-        .container { max-width: 1200px; margin: auto; background: white; border-radius: 2rem; padding: 2rem; box-shadow: 0 20px 35px rgba(0,0,0,0.1); }
-        h1 { color: #1e6f3f; margin-bottom: 0.5rem; }
-        .note { background: #fff3cd; border-left: 6px solid #ffc107; padding: 1rem; margin: 1rem 0; border-radius: 12px; }
-        input, select, textarea, button { width: 100%; padding: 12px; margin: 8px 0; border-radius: 28px; border: 1px solid #ccc; }
-        button { background: #1f7842; color: white; font-weight: bold; cursor: pointer; border: none; }
-        button:hover { opacity: 0.9; }
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        th, td { border-bottom: 1px solid #ddd; padding: 10px; text-align: left; }
-        .badge { background: #e0f2e6; border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; }
-        .flex { display: flex; gap: 2rem; flex-wrap: wrap; }
-        .form-card, .list-card { flex: 1; min-width: 300px; }
+        .form-card, .list-card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.12);
+            padding: 1.8rem 2rem;
+            flex: 1;
+            min-width: 320px;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e4620;
+            border-left: 6px solid #2e8b57;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.4rem;
+            color: #1f3b2c;
+        }
+        label i {
+            width: 24px;
+            color: #2e8b57;
+            margin-right: 6px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 1.2rem;
+            border: 1.5px solid #e2e8f0;
+            background: #fefefe;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            outline: none;
+        }
+        input:focus, select:focus {
+            border-color: #2e8b57;
+            box-shadow: 0 0 0 3px rgba(46,139,86,0.2);
+        }
+        button {
+            background: linear-gradient(95deg, #1f7842, #2e9c5c);
+            border: none;
+            padding: 0.85rem 1.2rem;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            filter: brightness(0.96);
+        }
+        .message-area {
+            margin-top: 1rem;
+            padding: 0.7rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            text-align: center;
+            font-weight: 500;
+            background: #f1f9f0;
+            color: #1f5631;
+            display: none;
+        }
+        .message-area.show {
+            display: block;
+            animation: fade 0.2s ease;
+        }
+        .error-message {
+            background: #ffe8e6;
+            color: #c23d2b;
+        }
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(-5px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 0.8rem 0.5rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        th {
+            background-color: #eef5ea;
+            color: #1f4d2e;
+        }
+        .badge-time {
+            background: #e0f2e6;
+            padding: 0.2rem 0.6rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .empty-row td {
+            text-align: center;
+            color: #8faa9a;
+            padding: 2rem;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+        .reg-count {
+            background: #d9f0e3;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .refresh-btn {
+            background: #eef2ea;
+            color: #2d5a3b;
+            width: auto;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            margin: 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #4c6b5a;
+        }
+        .note-token {
+            background: #fff7e0;
+            border-left: 5px solid #e6a017;
+            padding: 0.8rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+        }
+        @media (max-width: 760px) {
+            body { padding: 1rem; }
+            .form-card, .list-card { padding: 1.2rem; }
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>🏸 Đăng ký đánh cầu lông <span style="font-size:0.9rem;">(dữ liệu lưu trên GitHub Issues)</span></h1>
-    <div class="note">
-        <strong>⚠️ HƯỚNG DẪN:</strong> Trước khi dùng, bạn <strong>phải sửa 2 dòng màu đỏ</strong> bên dưới trong thẻ <code>&lt;script&gt;</code> (tìm từ khóa <span class="highlight-red">🔴 THAY_DOI_O_DAY</span>).
+    <div class="hero">
+        <h1><i class="fas fa-table-tennis"></i> SÂN CẦU LÔNG <i class="fas fa-shuttlecock"></i></h1>
+        <p><i class="fab fa-github"></i> Dữ liệu lưu trên GitHub Issues · Repository: <strong>khanhvt50/caulong</strong></p>
     </div>
 
-    <div class="flex">
+    <div class="dashboard">
         <!-- FORM ĐĂNG KÝ -->
         <div class="form-card">
-            <h3>📝 Thông tin đăng ký</h3>
-            <form id="regForm">
-                <input type="text" id="fullName" placeholder="Họ và tên *" required>
-                <input type="tel" id="phone" placeholder="Số điện thoại *" required>
-                <input type="email" id="email" placeholder="Email *" required>
-                <input type="date" id="playDate" required>
-                <select id="timeSlot" required>
-                    <option value="">-- Khung giờ --</option>
-                    <option>08:00-10:00</option><option>10:00-12:00</option>
-                    <option>14:00-16:00</option><option>16:00-18:00</option>
-                    <option>18:00-20:00</option>
-                </select>
-                <textarea id="notes" rows="2" placeholder="Ghi chú (vợt, ghép đôi...)"></textarea>
-                <button type="submit">✅ Đăng ký & gửi lên GitHub</button>
-                <div id="msg" style="margin-top: 10px; font-size:0.85rem;"></div>
+            <div class="section-title">
+                <i class="fas fa-clipboard-list"></i> Đăng ký tham gia
+            </div>
+            <div class="note-token">
+                <i class="fas fa-key"></i> <strong>Token mẫu hiện tại:</strong> <code>ABCD11111111111111111111</code><br>
+                <i class="fas fa-exclamation-triangle"></i> <strong>Quan trọng:</strong> Bạn phải thay token này bằng <strong>GitHub token thật</strong> (bắt đầu bằng <code>ghp_</code> hoặc <code>github_pat_</code>) trong file HTML (dòng <code>const GITHUB_TOKEN</code>).<br>
+                Repository đã cấu hình: <code>khanhvt50/caulong</code>
+            </div>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label><i class="fas fa-user-circle"></i> Họ và tên *</label>
+                    <input type="text" id="fullName" placeholder="Nguyễn Văn An" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-phone-alt"></i> Số điện thoại *</label>
+                    <input type="tel" id="phone" placeholder="0987654321" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> Email *</label>
+                    <input type="email" id="email" placeholder="ten@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-day"></i> Ngày tập *</label>
+                    <input type="date" id="playDate" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-clock"></i> Khung giờ *</label>
+                    <select id="timeSlot" required>
+                        <option value="">-- Chọn --</option>
+                        <option>08:00 - 10:00</option>
+                        <option>10:00 - 12:00</option>
+                        <option>14:00 - 16:00</option>
+                        <option>16:00 - 18:00</option>
+                        <option>18:00 - 20:00</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-note-sticky"></i> Ghi chú</label>
+                    <textarea id="notes" rows="2" placeholder="Ví dụ: có vợt, thích đánh đôi"></textarea>
+                </div>
+                <button type="submit"><i class="fas fa-check-circle"></i> Đăng ký (tạo Issue)</button>
+                <div id="formMessage" class="message-area"></div>
             </form>
         </div>
 
-        <!-- DANH SÁCH ĐĂNG KÝ -->
+        <!-- DANH SÁCH ĐĂNG KÝ LẤY TỪ GITHUB -->
         <div class="list-card">
-            <h3>📋 Danh sách đã đăng ký <button id="refreshBtn" style="width:auto; padding:6px 12px; margin-left:10px;">🔄 Tải lại</button></h3>
-            <div id="regCount" style="margin:10px 0;"></div>
-            <div style="overflow-x:auto;">
-                <table id="regTable">
-                    <thead><tr><th>Họ tên</th><th>SĐT</th><th>Ngày</th><th>Giờ</th><th>Issue</th></tr></thead>
-                    <tbody><tr><td colspan="5">🔌 Đang tải danh sách...</td></tr></tbody>
+            <div class="section-title">
+                <i class="fas fa-users"></i> Danh sách đã đăng ký
+            </div>
+            <div class="stats">
+                <span class="reg-count" id="regCount"><i class="fas fa-spinner fa-pulse"></i> Đang tải...</span>
+                <button id="refreshListBtn" class="refresh-btn"><i class="fas fa-sync-alt"></i> Làm mới</button>
+            </div>
+            <div style="overflow-x: auto;">
+                <table id="registrationTable">
+                    <thead>
+                        <tr><th>Họ tên</th><th>SĐT</th><th>Ngày</th><th>Giờ</th><th>Issue</th></tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <tr class="empty-row"><td colspan="5">Đang kết nối GitHub...</td></tr>
+                    </tbody>
                 </table>
             </div>
-            <p style="font-size:0.7rem; margin-top:1rem;">Mỗi đăng ký = 1 issue trên GitHub (label: badminton)</p>
+            <div style="font-size:0.7rem; margin-top:1rem; text-align:center;">
+                <i class="fab fa-github"></i> Mỗi đăng ký = 1 issue với label <strong>badminton-registration</strong>
+            </div>
         </div>
     </div>
+    <footer>
+        <i class="fas fa-shuttlecock"></i> Dữ liệu lưu vĩnh viễn trên GitHub · Chỉ cần token đúng quyền repo
+    </footer>
 </div>
 
 <script>
-    // ========== 🔴🔴🔴 BẠN CẦN SỬA 2 DÒNG DƯỚI ĐÂY (MÀU ĐỎ) ==========
-    // 1. Thay 'github_pat_xxx' bằng TOKEN thật của bạn (cần quyền repo)
-    const GITHUB_TOKEN = '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';   // <--- 🔴 THAY ĐỔI Ở ĐÂY
-    // 2. Thay 'username/repo-name' bằng tên repository của bạn (VD: 'nguyenvana/badminton')
-    const REPO_NAME = 'khanhvt50/caulong';   // <--- 🔴 THAY ĐỔI Ở ĐÂY
-    // ========== KẾT THÚC VÙNG CẦN SỬA ==========
+    // ========== 🔴 CẤU HÌNH CỦA BẠN (VÍ DỤ CỤ THỂ) ==========
+    // THAY token giả 'ABCD11111111111111111111' bằng token thật của bạn (bắt đầu bằng ghp_ hoặc github_pat_)
+    const GITHUB_TOKEN = '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';   // 👈 THAY BẰNG TOKEN THẬT
+    const REPO_NAME = 'khanhvt50/caulong';             // ✅ Đã đúng với yêu cầu
+    // ====================================================
 
-    // Hàm gọi API GitHub lấy danh sách issues có label "badminton"
-    async function fetchRegistrations() {
-        const url = `https://api.github.com/repos/${REPO_NAME}/issues?labels=badminton&state=all&per_page=100`;
-        const headers = { Accept: 'application/vnd.github.v3+json' };
-        if (GITHUB_TOKEN && GITHUB_TOKEN !== 'github_pat_xxx') {
-            headers.Authorization = `token ${GITHUB_TOKEN}`;
-        }
-        const res = await fetch(url, { headers });
-        if (!res.ok) throw new Error(`Lỗi ${res.status}: ${res.statusText}`);
-        const issues = await res.json();
-        return issues.map(issue => {
-            const body = issue.body || '';
-            const getName = () => {
-                const match = body.match(/- \*\*Họ và tên:\*\* (.*)/i);
-                return match ? match[1] : (issue.title.replace('Đăng ký: ', ''));
-            };
-            const getPhone = () => { const m = body.match(/- \*\*Số điện thoại:\*\* (.*)/i); return m ? m[1] : '—'; };
-            const getDate = () => { const m = body.match(/- \*\*Ngày tập:\*\* (.*)/i); return m ? m[1] : '—'; };
-            const getTime = () => { const m = body.match(/- \*\*Giờ:\*\* (.*)/i); return m ? m[1] : '—'; };
-            return {
-                number: issue.number,
-                url: issue.html_url,
-                fullName: getName(),
-                phone: getPhone(),
-                playDate: getDate(),
-                timeSlot: getTime()
-            };
-        });
+    // Helper hiển thị message
+    let msgTimeout;
+    function showMessage(text, isError = false, targetId = "formMessage") {
+        const msgDiv = document.getElementById(targetId);
+        if (!msgDiv) return;
+        msgDiv.innerText = text;
+        msgDiv.classList.add("show");
+        if (isError) msgDiv.classList.add("error-message");
+        else msgDiv.classList.remove("error-message");
+        if (msgTimeout) clearTimeout(msgTimeout);
+        msgTimeout = setTimeout(() => msgDiv.classList.remove("show"), 4000);
     }
 
-    // Hiển thị danh sách
-    async function renderList() {
-        const tbody = document.querySelector('#regTable tbody');
-        const countSpan = document.getElementById('regCount');
+    // Lấy danh sách issues từ GitHub (label: badminton-registration)
+    async function fetchRegistrations() {
+        const url = `https://api.github.com/repos/${REPO_NAME}/issues?labels=badminton-registration&state=all&per_page=100`;
+        const headers = { Accept: 'application/vnd.github.v3+json' };
+        if (GITHUB_TOKEN && GITHUB_TOKEN !== 'ABCD11111111111111111111') {
+            headers.Authorization = `token ${GITHUB_TOKEN}`;
+        }
+        const response = await fetch(url, { headers });
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || `HTTP ${response.status}`);
+        }
+        const issues = await response.json();
+        return issues.map(issue => parseIssueToRegistration(issue));
+    }
+
+    // Parse nội dung issue -> lấy thông tin đăng ký
+    function parseIssueToRegistration(issue) {
+        const body = issue.body || "";
+        const getField = (label) => {
+            const regex = new RegExp(`- \\*\\*${label}:\\*\\* (.*)`, 'i');
+            const match = body.match(regex);
+            return match ? match[1].trim() : "—";
+        };
+        let fullName = getField("Họ và tên");
+        let phone = getField("Số điện thoại");
+        let playDate = getField("Ngày tập");
+        let timeSlot = getField("Giờ");
+        // fallback nếu dùng format khác (từ form cũ)
+        if (fullName === "—" && issue.title.startsWith("Đăng ký: ")) {
+            fullName = issue.title.replace("Đăng ký: ", "");
+        }
+        if (playDate === "—") playDate = getField("Ngày tập luyện");
+        if (timeSlot === "—") timeSlot = getField("Khung giờ mong muốn");
+        
+        return {
+            number: issue.number,
+            url: issue.html_url,
+            fullName: fullName,
+            phone: phone,
+            playDate: playDate,
+            timeSlot: timeSlot
+        };
+    }
+
+    // Hiển thị danh sách lên bảng
+    async function renderRegistrations() {
+        const tbody = document.getElementById("tableBody");
+        const countSpan = document.getElementById("regCount");
         try {
             const list = await fetchRegistrations();
             if (list.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5">📭 Chưa có đăng ký nào</td></tr>';
-                countSpan.innerHTML = '0 người đã đăng ký';
+                tbody.innerHTML = '<tr class="empty-row"><td colspan="5">📭 Chưa có đăng ký nào. Hãy là người đầu tiên!</td></tr>';
+                countSpan.innerHTML = '<i class="fas fa-users"></i> 0 người';
                 return;
             }
-            countSpan.innerHTML = `${list.length} người đã đăng ký`;
-            let html = '';
+            countSpan.innerHTML = `<i class="fas fa-check-circle"></i> ${list.length} người đã đăng ký`;
+            let html = "";
             list.forEach(reg => {
                 html += `<tr>
-                    <td>${escapeHtml(reg.fullName)}</td>
+                    <td><strong>${escapeHtml(reg.fullName)}</strong></td>
                     <td>${escapeHtml(reg.phone)}</td>
                     <td>${escapeHtml(reg.playDate)}</td>
-                    <td><span class="badge">${escapeHtml(reg.timeSlot)}</span></td>
-                    <td><a href="${reg.url}" target="_blank">#${reg.number}</a></td>
+                    <td><span class="badge-time">${escapeHtml(reg.timeSlot)}</span></td>
+                    <td><a href="${reg.url}" target="_blank" style="color:#2e8b57;">#${reg.number}</a></td>
                 </tr>`;
             });
             tbody.innerHTML = html;
         } catch (err) {
-            tbody.innerHTML = `<tr><td colspan="5">❌ Lỗi tải: ${err.message}<br>Kiểm tra TOKEN và REPO_NAME đã sửa đúng chưa!</td></tr>`;
-            countSpan.innerHTML = 'Lỗi kết nối';
+            console.error(err);
+            tbody.innerHTML = `<tr class="empty-row"><td colspan="5">❌ Lỗi: ${err.message}<br>Kiểm tra token và repository (cần token có quyền repo).</td></tr>`;
+            countSpan.innerHTML = '⚠️ Lỗi kết nối';
         }
     }
 
-    function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
 
-    // Tạo issue mới
+    // Tạo issue mới từ dữ liệu form
     async function createIssue(data) {
         const title = `Đăng ký: ${data.fullName}`;
         const body = `
@@ -160,69 +413,86 @@
 - **Email:** ${data.email}
 - **Ngày tập:** ${data.playDate}
 - **Giờ:** ${data.timeSlot}
-- **Ghi chú:** ${data.notes || 'Không có'}
+- **Ghi chú:** ${data.notes || "Không có"}
         `;
         const url = `https://api.github.com/repos/${REPO_NAME}/issues`;
-        const res = await fetch(url, {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 Authorization: `token ${GITHUB_TOKEN}`,
                 Accept: 'application/vnd.github.v3+json',
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title, body, labels: ['badminton'] })
+            body: JSON.stringify({
+                title: title,
+                body: body,
+                labels: ['badminton-registration']
+            })
         });
-        if (!res.ok) {
-            const err = await res.json();
-            throw new Error(err.message);
+        if (!response.ok) {
+            const errData = await response.json();
+            throw new Error(errData.message || 'Không thể tạo issue');
         }
-        return await res.json();
+        return await response.json();
     }
 
     // Xử lý submit form
-    document.getElementById('regForm').addEventListener('submit', async (e) => {
+    const form = document.getElementById("registrationForm");
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const msgDiv = document.getElementById('msg');
-        msgDiv.innerHTML = '⏳ Đang gửi...';
-        const fullName = document.getElementById('fullName').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const playDate = document.getElementById('playDate').value;
-        const timeSlot = document.getElementById('timeSlot').value;
-        const notes = document.getElementById('notes').value;
+        const fullName = document.getElementById("fullName").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const playDate = document.getElementById("playDate").value;
+        const timeSlot = document.getElementById("timeSlot").value;
+        const notes = document.getElementById("notes").value.trim();
 
-        if (!fullName || !phone || !email || !playDate || !timeSlot) {
-            msgDiv.innerHTML = '❌ Vui lòng điền đầy đủ thông tin!';
-            return;
-        }
-        // Validate phone (8-12 số)
-        if (!/^[0-9]{8,12}$/.test(phone.replace(/\s/g,''))) {
-            msgDiv.innerHTML = '❌ Số điện thoại không hợp lệ (8-12 chữ số)';
-            return;
-        }
-        // Ngày không quá khứ
-        if (new Date(playDate) < new Date().setHours(0,0,0,0)) {
-            msgDiv.innerHTML = '❌ Ngày tập không được là quá khứ';
+        // validate
+        if (!fullName) { showMessage("Vui lòng nhập họ tên", true); return; }
+        const phoneClean = phone.replace(/[\s\-\(\)]/g, '');
+        if (!phoneClean || !/^[0-9]{8,12}$/.test(phoneClean)) { showMessage("Số điện thoại không hợp lệ (8-12 số)", true); return; }
+        const emailRegex = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+        if (!email || !emailRegex.test(email)) { showMessage("Email không đúng định dạng", true); return; }
+        if (!playDate) { showMessage("Chọn ngày tập", true); return; }
+        if (!timeSlot) { showMessage("Chọn khung giờ", true); return; }
+        const today = new Date(); today.setHours(0,0,0,0);
+        if (new Date(playDate) < today) { showMessage("Ngày tập không được trong quá khứ", true); return; }
+
+        // Kiểm tra token có bị để mẫu không
+        if (GITHUB_TOKEN === 'ABCD11111111111111111111') {
+            showMessage("⚠️ Bạn chưa thay token mẫu! Hãy mở file HTML, tìm dòng GITHUB_TOKEN và thay bằng token thật của GitHub.", true);
             return;
         }
 
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Đang gửi...';
         try {
             await createIssue({ fullName, phone, email, playDate, timeSlot, notes });
-            msgDiv.innerHTML = '✅ Đăng ký thành công! Đã tạo issue trên GitHub.';
-            document.getElementById('regForm').reset();
-            await renderList(); // cập nhật danh sách
+            showMessage("🎉 Đăng ký thành công! Issue đã được tạo trên GitHub.", false);
+            form.reset();
+            await renderRegistrations();
         } catch (err) {
-            msgDiv.innerHTML = `❌ Lỗi: ${err.message}. Kiểm tra token và repo.`;
+            showMessage(`Lỗi: ${err.message}`, true);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
         }
     });
 
-    document.getElementById('refreshBtn').addEventListener('click', renderList);
-    // Lưu ý: khi trang load, nếu token và repo chưa sửa thì sẽ báo lỗi
-    if (GITHUB_TOKEN === 'github_pat_xxx' || REPO_NAME === 'username/repo-name') {
-        document.querySelector('#regTable tbody').innerHTML = '<tr><td colspan="5">🔴 BẠN CHƯA SỬA TOKEN & REPO! Hãy mở file HTML, tìm 2 dòng màu đỏ trong thẻ script và thay bằng thông tin thật.</td></tr>';
-    } else {
-        renderList();
-    }
+    // Nút làm mới danh sách
+    document.getElementById("refreshListBtn").addEventListener("click", () => {
+        renderRegistrations();
+        showMessage("Đang tải lại danh sách...", false);
+    });
+
+    // Khởi tạo: set min date cho input date
+    const todayStr = new Date().toISOString().split('T')[0];
+    document.getElementById("playDate").setAttribute("min", todayStr);
+
+    // Tải danh sách khi mở trang
+    renderRegistrations();
 </script>
 </body>
 </html>
